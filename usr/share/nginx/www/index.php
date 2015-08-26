@@ -5,7 +5,7 @@ define("TITLE","Raspberry Pi SDカード バックアップ/リストア");
 # バックアップ/リストアの処理実体
 $command = "にゃお";
 $filename = "にゃお";
-$sh_script = "にゃお";
+$sh_script = "";
 if($_SERVER["REQUEST_METHOD"] == "POST"){
   $command = $_POST['command'];
   $filename = $_POST['filename'];
@@ -33,7 +33,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 #     $sh_script = "/usr/bin/unzip /boot/DATA/".$filename." | sudo /bin/dd of=/dev/sda bs=1M 2>/dev/null &";
 #     break;
     case "gz":
-      $sh_script = "/bin/gzip -dc /boot/DATA/".$filename." | sudo /bin/dd of=/dev/sda bs=1M 2>/boot/log/dd.restore.log &";
+      $sh_script = "/bin/gzip -dc /boot/DATA/".$filename." | sudo /bin/dd of=/dev/sda bs=1M 1>&2 2>/boot/log/dd.restore.log &";
       break;
     case "img":
 #     $sh_script = "sudo dd if=/boot/DATA/".$filename." of=/dev/sda bs=1M > /dev/null 2>&1 &";
@@ -44,18 +44,27 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       break;
     }
   }
+  if ($sh_script != ""){
+    error_log('['.basename(__FILE__).':'.__LINE__.']'.' $sh_script = '.$sh_script);    
+    #$output=shell_exec($sh_script);
+    $output=exec($sh_script,$output2,$retval);
+    error_log('['.basename(__FILE__).':'.__LINE__.']'.' $output = '.$output);    
+    error_log('['.basename(__FILE__).':'.__LINE__.']'.' $sh_script = '.$sh_script);    
+    error_log('['.basename(__FILE__).':'.__LINE__.']'.' $output2 = '.$output2);    
+    error_log('['.basename(__FILE__).':'.__LINE__.']'.' $retval = '.$retval);    
+  }
+
   // リロード時の二重送信を防ぐために、自分自身に一度 GET を発行する（と、リロードされても POST がでない）
+  error_log('['.basename(__FILE__).':'.__LINE__.']'.' *** RELOAD ***');    
   header("Location: " . $_SERVER['SCRIPT_NAME']);
 }
-error_log('['.basename(__FILE__).':'.__LINE__.']'.' $sh_script = '.$sh_script);    
-#$output=shell_exec($sh_script);
-$output=exec($sh_script,$output2,$retval);
 
 #バックアップファイル名（仮）の作成
 $now = date("Y-m-d-Hi");
 $bf_name = $now."-RPi_Backup.gz";
 
 # ヘッダの表示
+error_log('['.basename(__FILE__).':'.__LINE__.']'.' *** RENDERING START ***');    
 show_html_head(TITLE);
 ?>
 <body>
@@ -212,14 +221,14 @@ show_html_head(TITLE);
 </div>
 
 <div data-role="content" data-theme="c" class="no-cache">
-	<!-- <p><?php echo $command ?></p>
-	<p><?php echo $filename ?></p>
-	<p><?php echo $path_parts['extension'] ?></p>
-  <p><?php echo $sh_script ?></p>
-  <p><?php echo $output ?></p>
-  <p><?php var_dump($output2) ?></p>
-  <p><?php echo $output2[0] ?></p>
-  <p><?php echo $retval ?></p> -->
+	<!-- <p><?#php echo $command ?></p>
+	<p><?#php echo $filename ?></p>
+	<p><?#php echo $path_parts['extension'] ?></p>
+  <p><?#php echo $sh_script ?></p>
+  <p><?#php echo $output ?></p>
+  <p><?#php var_dump($output2) ?></p>
+  <p><?#php echo $output2[0] ?></p>
+  <p><?#php echo $retval ?></p> -->
 
   <div id="status"></div>
 

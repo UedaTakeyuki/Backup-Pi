@@ -3,10 +3,11 @@ require_once("common/common.php");
 error_log('['.basename(__FILE__).':'.__LINE__.']'."start");
 // dd コマンドに USR1 シグナルを送る
 $result = `sudo pkill -USR1 -f dd`;
-sleep(4);
+sleep(1);
 // dd.backup.log ファイルの存在確認
 $dd_backup_file_exist = `if [ -e /boot/log/dd.backup.log ]; then echo "yes"; else echo "no"; fi`;
 $dd_restore_file_exist = `if [ -e /boot/log/dd.restore.log ]; then echo "yes"; else echo "no"; fi`;
+#sleep(9);
 //JSON形式で出力する
 $json['backup_running']=$dd_backup_file_exist;
 $json['restore_running']=$dd_restore_file_exist;
