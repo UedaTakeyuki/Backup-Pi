@@ -59,8 +59,8 @@ or
 ![スクリーンショット 2015-08-28 16.09.52.png](https://qiita-image-store.s3.amazonaws.com/0/46544/b459e2b1-cc87-9af7-69ce-1a13bbdc95bb.png "スクリーンショット 2015-08-28 16.09.52.png")
 ![スクリーンショット 2015-08-28 16.10.04.png](https://qiita-image-store.s3.amazonaws.com/0/46544/0d6f3383-4d41-231b-0727-03f952317407.png "スクリーンショット 2015-08-28 16.10.04.png")
 
-## File
-Backuped file is cleating in the /boot/DATA folder. Also, restoring files are selected from this folder. You can read/write it on the "Backup Pi" SD card from ***Windoww, Mac and Linux PC*** as follows.
+## Files on the "Backup Pi" SD card.
+Backuped file is cleating under the ***/boot/DATA*** folder. Also, restoring files are selected from this folder. You can read/write it on the "Backup Pi" SD card from ***Windoww, Mac and Linux PC*** as follows.
 
 ![スクリーンショット 2015-08-26 15.24.15.png](https://qiita-image-store.s3.amazonaws.com/0/46544/a237d1f0-6934-ddfa-6660-5ff66b7edb36.png "スクリーンショット 2015-08-26 15.24.15.png")
 
