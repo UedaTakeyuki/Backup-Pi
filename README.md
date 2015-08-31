@@ -65,4 +65,5 @@ Backuped file is cleating under the ***/boot/DATA*** folder. Also, restoring fil
 ![スクリーンショット 2015-08-26 15.24.15.png](https://qiita-image-store.s3.amazonaws.com/0/46544/a237d1f0-6934-ddfa-6660-5ff66b7edb36.png "スクリーンショット 2015-08-26 15.24.15.png")
 
 So, you can manage backuped files as ordinaly files.
+The ***/boot*** folder is expanded as ***FAT32***, as opposed to the original [Raspbian image](https://downloads.raspberrypi.org/raspbian_latest) was ***FAT16***.
 
