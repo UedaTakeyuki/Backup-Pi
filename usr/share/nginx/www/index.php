@@ -1,10 +1,16 @@
 <?php
 require_once("common/common.php");
-define("TITLE","Raspberry Pi SDカード バックアップ/リストア");
+define("TITLE","Backup-Pi");
 
+// timezone が Asia/Tokyo でなければ英語
+$timezone = substr(`cat /etc/timezone`, 0, -1);
+
+if ($timezone != 'Asia/Tokyo') {
+  header("Location: " . "index.en.php");
+}
 # バックアップ/リストアの処理実体
-$command = "にゃお";
-$filename = "にゃお";
+$command = "";
+$filename = "";
 $sh_script = "";
 if($_SERVER["REQUEST_METHOD"] == "POST"){
   $command = $_POST['command'];
@@ -228,7 +234,8 @@ show_html_head(TITLE);
   <p><?#php echo $output ?></p>
   <p><?#php var_dump($output2) ?></p>
   <p><?#php echo $output2[0] ?></p>
-  <p><?#php echo $retval ?></p> -->
+  <p><?#php echo $retval ?></p>
+  <p><?#php echo $timezone ?></p> -->
 
   <div id="status"></div>
 
