@@ -5,9 +5,11 @@ Backing up and Restoring your Raspberry Pi's SD Card using Raspberry Pi.
 
 # Download.
 - for ***8Gbyte SD card image*** (with 4Gbyte backup files area):
-http://ovh.to/Y7sjDA8
+http://ovh.to/5gyERsM
 - for ***16Gbyte SD card image*** (with 11Gbyte backup files area);
-http://ovh.to/XAycnsG
+http://ovh.to/qKZpXH4w
+
+8th Sep, 2015: Replace link with Fixed version.
 
 # Preparation.
 - Additional 8Gbyte or 16Gbyte SD card for this application, differ from buckupping SD card.
