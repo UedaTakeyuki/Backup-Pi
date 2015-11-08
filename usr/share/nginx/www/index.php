@@ -173,7 +173,7 @@ show_html_head(TITLE);
           start_backuprestore();
           document.getElementById("status").innerHTML = 'バックアップ 作成中... ' + separate(data.backup_size) + 'バイト '
             + '<a href="javascript:break_dd();" >中断</a>';// + "<br> p=" + prev_size_of_resultfile + "<br> c=" + size_of_resultfile;
-          if (prev_size_of_backuplog == data.backup_size && data.backup_size != 0){
+          if (data.dd_process_exist < 3 && prev_size_of_backuplog == data.backup_size && data.backup_size != 0){
             document.getElementById("status").innerHTML = 'バックアップ完了';//+ "<br> p=" + prev_size_of_resultfile + "<br> c=" + size_of_resultfile;
             end_backupresotre();
             //clearInterval(timer1);
@@ -189,7 +189,7 @@ show_html_head(TITLE);
           start_backuprestore();
           document.getElementById("status").innerHTML = '選択ファイルで復元中... ' + separate(data.restore_size) + 'バイト '
             + '<a href="javascript:break_dd();" >中断</a>';// + "<br> p=" + prev_size_of_resultfile + "<br> c=" + size_of_resultfile;
-          if (prev_size_of_restorelog == data.restore_size && data.restore_size != 0){
+          if (data.dd_process_exist < 3 && prev_size_of_restorelog == data.restore_size && data.restore_size != 0){
             document.getElementById("status").innerHTML = '復元完了';//+ "<br> p=" + prev_size_of_resultfile + "<br> c=" + size_of_resultfile;
             end_backupresotre();
             //clearInterval(timer1);

@@ -7,10 +7,12 @@ sleep(1);
 // dd.backup.log ファイルの存在確認
 $dd_backup_file_exist = `if [ -e /boot/log/dd.backup.log ]; then echo "yes"; else echo "no"; fi`;
 $dd_restore_file_exist = `if [ -e /boot/log/dd.restore.log ]; then echo "yes"; else echo "no"; fi`;
+$dd_process_exist = `ps -aef | grep "sudo /bin/dd " | wc -l`;
 #sleep(9);
 //JSON形式で出力する
 $json['backup_running']=$dd_backup_file_exist;
 $json['restore_running']=$dd_restore_file_exist;
+$json['dd_process_exist']=substr($dd_process_exist,0,-1);
 
 if ($json['backup_running'] == "yes\n") {
   // dd の経過サイズ情報を追加
