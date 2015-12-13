@@ -20,9 +20,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   if ($command == "backup"){
     switch ($path_parts['extension']){
 #   case "zip":
-#     $sh_script = "sudo /bin/dd if=/dev/sda bs=1M | /usr/bin/zip /boot/Data/".$filename." - &";
+#      $sh_script = "sudo /bin/dd if=/dev/sda bs=1M 2>/boot/log/dd.backup.log | /usr/bin/zip /boot/Data/".$filename." - 2>/dev/null &";
 #     $sh_script = "sudo /usr/share/nginx/www/zip.sh ".$filename." > /dev/null 2>&1 &";
-#     break;
+#      break;
     case "gz":
       $sh_script = "sudo /bin/dd if=/dev/sda bs=1M 2>/boot/log/dd.backup.log | /bin/gzip --fast > /boot/DATA/".$filename." 2>/dev/null &";
       break;
@@ -35,9 +35,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
   } elseif ($command == "restore"){
     switch ($path_parts['extension']){
-#   case "zip":
-#     $sh_script = "/usr/bin/unzip /boot/DATA/".$filename." | sudo /bin/dd of=/dev/sda bs=1M 2>/dev/null &";
-#     break;
+   case "zip":
+     $sh_script = "/usr/bin/funzip /boot/DATA/".$filename." | sudo /bin/dd of=/dev/sda bs=1M 1>&2 2>/boot/log/dd.restore.log &";
+     break;
     case "gz":
       $sh_script = "/bin/gzip -dc /boot/DATA/".$filename." | sudo /bin/dd of=/dev/sda bs=1M 1>&2 2>/boot/log/dd.restore.log &";
       break;

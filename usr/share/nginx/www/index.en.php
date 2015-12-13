@@ -34,9 +34,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
   } elseif ($command == "restore"){
     switch ($path_parts['extension']){
-#   case "zip":
-#     $sh_script = "/usr/bin/unzip /boot/DATA/".$filename." | sudo /bin/dd of=/dev/sda bs=1M 2>/dev/null &";
-#     break;
+   case "zip":
+     $sh_script = "/usr/bin/funzip /boot/DATA/".$filename." | sudo /bin/dd of=/dev/sda bs=1M 1>&2 2>/boot/log/dd.restore.log &";
+     break;
     case "gz":
       $sh_script = "/bin/gzip -dc /boot/DATA/".$filename." | sudo /bin/dd of=/dev/sda bs=1M 1>&2 2>/boot/log/dd.restore.log &";
       break;
