@@ -24,29 +24,36 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 #     $sh_script = "sudo /usr/share/nginx/www/zip.sh ".$filename." > /dev/null 2>&1 &";
 #      break;
     case "gz":
-      $sh_script = "sudo /bin/dd if=/dev/sda bs=1M 2>/boot/log/dd.backup.log | /bin/gzip --fast > /boot/DATA/".$filename." 2>/dev/null &";
+      $sh_script = "sudo /bin/dd if=/dev/sda bs=1M 2>".DD_BACKUP_LOG." | /bin/gzip --fast > /boot/DATA/".$filename." 2>/dev/null &";
+#      $sh_script = "sudo /bin/dd if=/dev/sda bs=1M 2>/boot/log/dd.backup.log | /bin/gzip --fast > /boot/DATA/".$filename." 2>/dev/null &";
       break;
     case "img":
-      $sh_script = "sudo /bin/dd if=/dev/sda of=/boot/DATA/".$filename." bs=1M > /boot/log/dd.backup.log 2>&1 &";
+      $sh_script = "sudo /bin/dd if=/dev/sda of=/boot/DATA/".$filename." bs=1M > ".DD_BACKUP_LOG." 2>&1 &";
+#      $sh_script = "sudo /bin/dd if=/dev/sda of=/boot/DATA/".$filename." bs=1M > /boot/log/dd.backup.log 2>&1 &";
       break;
     default:
-      $sh_script = "sudo /bin/dd if=/dev/sda of=/boot/DATA/".$filename.".img bs=1M > /boot/log/dd.backup.log 2>&1 &";
+      $sh_script = "sudo /bin/dd if=/dev/sda of=/boot/DATA/".$filename.".img bs=1M > ".DD_BACKUP_LOG." 2>&1 &";
+#      $sh_script = "sudo /bin/dd if=/dev/sda of=/boot/DATA/".$filename.".img bs=1M > /boot/log/dd.backup.log 2>&1 &";
       break;
     }
   } elseif ($command == "restore"){
     switch ($path_parts['extension']){
    case "zip":
-     $sh_script = "/usr/bin/funzip /boot/DATA/".$filename." | sudo /bin/dd of=/dev/sda bs=1M 1>&2 2>/boot/log/dd.restore.log &";
+     $sh_script = "/usr/bin/funzip /boot/DATA/".$filename." | sudo /bin/dd of=/dev/sda bs=1M 1>&2 2>".DD_RESTORE_LOG." &";
+#     $sh_script = "/usr/bin/funzip /boot/DATA/".$filename." | sudo /bin/dd of=/dev/sda bs=1M 1>&2 2>/boot/log/dd.restore.log &";
      break;
     case "gz":
-      $sh_script = "/bin/gzip -dc /boot/DATA/".$filename." | sudo /bin/dd of=/dev/sda bs=1M 1>&2 2>/boot/log/dd.restore.log &";
+      $sh_script = "/bin/gzip -dc /boot/DATA/".$filename." | sudo /bin/dd of=/dev/sda bs=1M 1>&2 2>".DD_RESTORE_LOG." &";
+#      $sh_script = "/bin/gzip -dc /boot/DATA/".$filename." | sudo /bin/dd of=/dev/sda bs=1M 1>&2 2>/boot/log/dd.restore.log &";
       break;
     case "img":
 #     $sh_script = "sudo dd if=/boot/DATA/".$filename." of=/dev/sda bs=1M > /dev/null 2>&1 &";
-      $sh_script = "sudo dd if=/boot/DATA/".$filename." of=/dev/sda bs=1M > /boot/log/dd.restore.log 2>&1 &";
+      $sh_script = "sudo dd if=/boot/DATA/".$filename." of=/dev/sda bs=1M > ".DD_RESTORE_LOG." 2>&1 &";
+#      $sh_script = "sudo dd if=/boot/DATA/".$filename." of=/dev/sda bs=1M > /boot/log/dd.restore.log 2>&1 &";
       break;
     default:
-      $sh_script = "sudo dd if=/boot/DATA/".$filename." of=/dev/sda bs=1M > /boot/log/dd.restore.log 2>&1 &";
+      $sh_script = "sudo dd if=/boot/DATA/".$filename." of=/dev/sda bs=1M > ".DD_RESTORE_LOG." 2>&1 &";
+#      $sh_script = "sudo dd if=/boot/DATA/".$filename." of=/dev/sda bs=1M > /boot/log/dd.restore.log 2>&1 &";
       break;
     }
   }

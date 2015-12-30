@@ -5,6 +5,8 @@
 //
 //=====================================
 define('COPYRIGHT', '© Atelier UEDA🐸');
+define('DD_BACKUP_LOG', '/tmp/dd.backup.log');
+define('DD_RESTORE_LOG', '/tmp/dd.restore.log');
 
 //=====================================
 //
